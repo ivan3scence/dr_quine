@@ -1,2 +1,0 @@
-#include <stdio.h>
-int main(){char str[]="#include <stdio.h>int main(){char str[]=;printf(%.18s%c%.22s%c%s%c%.8s%c%.33s%c%s, str, 10, str+18, 34, str, 34, str+40, 34, str+48, 34, str+48+33);}";printf("%.18s%c%.22s%c%s%c%.8s%c%.33s%c%s", str, 10, str+18, 34, str, 34, str+40, 34, str+48, 34, str+48+33);}

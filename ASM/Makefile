@@ -4,23 +4,28 @@ GRACE = Grace
 
 SULLY = Sully
 
-COL_SRC = Colleen.c
+COL_SRC = Colleen.S
 
-GRA_SRC = Grace.c
+GRA_SRC = Grace.S
 
-SUL_SRC = Sully.c
+SUL_SRC = Sully.S
 
-COL_OBJ = ${patsubst %.c, %.o, ${COL_SRC}}
+COL_OBJ = ${patsubst %.S, %.o, ${COL_SRC}}
 
-GRA_OBJ = ${patsubst %.c, %.o, ${GRA_SRC}}
+GRA_OBJ = ${patsubst %.S, %.o, ${GRA_SRC}}
 
-SUL_OBJ = ${patsubst %.c, %.o, ${SUL_SRC}}
+SUL_OBJ = ${patsubst %.S, %.o, ${SUL_SRC}}
+
+ASM = nasm
+
+NFLAGS = -f elf64
 
 CC = cc
 
-CFLAGS = -g -fsanitize=address
+CFLAGS = -m64 -no-pie -lc
 
-all: 	${COLLEEN} ${GRACE} ${SULLY}
+
+all: 	${COLLEEN}
 
 ${COLLEEN}: 	${COL_OBJ}
 	${CC} ${CFLAGS} $? -o $@
@@ -31,8 +36,8 @@ ${GRACE}: 	${GRA_OBJ}
 ${SULLY}: 	${SUL_OBJ}
 	${CC} ${CFLAGS} $? -o $@
 
-%.o:	%.c
-	${CC} -c ${CFLAGS} $< -o ${<:.c=.o}
+%.o:	%.S
+	${ASM} ${NFLAGS} $< -o ${<:.S=.o}
 
 clean:
 	rm -f ${COL_OBJ} ${GRA_OBJ} ${SUL_OBJ}
