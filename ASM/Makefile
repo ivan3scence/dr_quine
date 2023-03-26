@@ -18,14 +18,14 @@ SUL_OBJ = ${patsubst %.S, %.o, ${SUL_SRC}}
 
 ASM = nasm
 
-NFLAGS = -f elf64
+NFLAGS = -f elf64 -F dwarf -g
 
 CC = cc
 
-CFLAGS = -m64 -no-pie -lc
+CFLAGS = -m64 -no-pie -lc -g -fsanitize=address
 
 
-all: 	${COLLEEN}
+all: 	${COLLEEN} ${GRACE} Makefile
 
 ${COLLEEN}: 	${COL_OBJ}
 	${CC} ${CFLAGS} $? -o $@
@@ -40,7 +40,7 @@ ${SULLY}: 	${SUL_OBJ}
 	${ASM} ${NFLAGS} $< -o ${<:.S=.o}
 
 clean:
-	rm -f ${COL_OBJ} ${GRA_OBJ} ${SUL_OBJ}
+	rm -f ${COL_OBJ} ${GRA_OBJ} ${SUL_OBJ} Grace_kid.S
 
 fclean:	clean
 	rm -f ${COLLEEN} ${GRACE} ${SULLY} Sully_* Grace_kid.c
