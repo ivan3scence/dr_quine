@@ -25,7 +25,7 @@ CC = cc
 CFLAGS = -m64 -no-pie -lc -g -fsanitize=address
 
 
-all: 	${COLLEEN} ${GRACE} Makefile
+all: 	${COLLEEN} ${GRACE} ${SULLY} Makefile
 
 ${COLLEEN}: 	${COL_OBJ}
 	${CC} ${CFLAGS} $? -o $@
@@ -46,3 +46,4 @@ fclean:	clean
 	rm -f ${COLLEEN} ${GRACE} ${SULLY} Sully_* Grace_kid.c
 
 re:		fclean all
+
